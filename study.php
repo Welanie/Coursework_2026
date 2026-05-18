@@ -117,7 +117,11 @@ include __DIR__ . '/includes/header.php';
 <?php else: ?>
     <?php
     $state = $_SESSION[$sessionKey] ?? $state;
-    $currentId = (int) ($state['queue'][0] ?? 0);
+    $currentId = (int) (
+        ($state['answered'] && !empty($state['last']['card_id']))
+            ? $state['last']['card_id']
+            : ($state['queue'][0] ?? 0)
+    );
     $card = $currentId ? fetch_card($currentId) : null;
     ?>
 
