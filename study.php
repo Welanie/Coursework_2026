@@ -39,13 +39,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? 'check';
 
     if ($action === 'check' && !$state['answered'] && !empty($state['queue'])) {
-        $card = fetch_card((int) $state['queue'][0]);
+        $submittedCardId = (int) ($_POST['card_id'] ?? 0);
+        $queueIds = array_map('intval', $state['queue']);
+        $queueIndex = $submittedCardId > 0 ? array_search($submittedCardId, $queueIds, true) : false;
+        if ($queueIndex === false) {
+            $queueIndex = 0;
+            $submittedCardId = (int) $queueIds[0];
+        }
+
+        $card = fetch_card($submittedCardId);
         if ($card) {
             $answer = trim($_POST['answer'] ?? '');
             $correct = answer_is_correct($answer, $card['name']);
             $state['answered'] = true;
             $state['last'] = [
                 'card_id' => (int) $card['id'],
+                'queue_index' => (int) $queueIndex,
                 'answer' => $answer,
                 'expected' => $card['name'],
                 'correct' => $correct,
@@ -62,7 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($action === 'next' && $state['answered']) {
         $last = $state['last'];
-        array_shift($state['queue']);
+        $removeIndex = (int) ($last['queue_index'] ?? 0);
+        array_splice($state['queue'], $removeIndex, 1);
         if ($last && !$last['correct'] && $mode !== 'test') {
             $position = min(2, count($state['queue']));
             array_splice($state['queue'], $position, 0, [(int) $last['card_id']]);
@@ -142,6 +152,7 @@ include __DIR__ . '/includes/header.php';
                     <input type="hidden" name="set_id" value="<?= h((string) $setId) ?>">
                     <input type="hidden" name="mode" value="<?= h($mode) ?>">
                     <input type="hidden" name="action" value="check">
+                    <input type="hidden" name="card_id" value="<?= h((string) $card['id']) ?>">
                     <div class="field">
                         <label for="answer">Ответ</label>
                         <input id="answer" name="answer" autocomplete="off" autofocus required>
