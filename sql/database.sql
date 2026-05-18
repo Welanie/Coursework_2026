@@ -182,4 +182,3 @@ INSERT INTO favorites (user_id, flashcard_id) VALUES
 (2, 1),
 (2, 6),
 (2, 9);
-

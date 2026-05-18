@@ -47,4 +47,3 @@ $activePath = trim(str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? ''), '/');
     <?php foreach (consume_flash() as $item): ?>
         <div class="alert <?= h($item['type']) ?>"><?= h($item['message']) ?></div>
     <?php endforeach; ?>
-

@@ -11,4 +11,3 @@ session_destroy();
 session_start();
 flash('success', 'Вы вышли из аккаунта.');
 redirect('index.php');
-

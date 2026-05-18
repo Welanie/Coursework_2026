@@ -11,4 +11,3 @@ define('DB_PASS', getenv('DB_PASS') ?: '');
 
 define('BASE_URL', rtrim(getenv('BASE_URL') ?: '', '/'));
 define('DEMO_SET_LIMIT', 10);
-

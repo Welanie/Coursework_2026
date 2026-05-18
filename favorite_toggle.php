@@ -29,4 +29,3 @@ if ($favoriteId) {
 }
 
 redirect('card.php?id=' . $cardId);
-

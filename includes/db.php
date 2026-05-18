@@ -20,4 +20,3 @@ function get_pdo(): PDO
 
     return $pdo;
 }
-

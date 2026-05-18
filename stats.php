@@ -157,4 +157,3 @@ include __DIR__ . '/includes/header.php';
 </script>
 
 <?php include __DIR__ . '/includes/footer.php'; ?>
-
