@@ -20,17 +20,19 @@ if ($shouldReset || empty($_SESSION[$sessionKey]) || ($_SESSION[$sessionKey]['se
         $queue = array_slice($queue, 0, DEMO_SET_LIMIT);
     }
     $_SESSION[$sessionKey] = [
-        'set_id'   => $setId,
-        'mode'     => $mode,
-        'queue'    => $queue,
-        'answered' => false,
-        'last'     => null,
-        'score'    => 0,
-        'total'    => 0,
+        'set_id'        => $setId,
+        'mode'          => $mode,
+        'queue'         => $queue,
+        'initial_total' => count($queue),
+        'answered'      => false,
+        'last'          => null,
+        'score'         => 0,
+        'total'         => 0,
     ];
 }
 
 $state    = $_SESSION[$sessionKey];
+$state['initial_total'] = (int) ($state['initial_total'] ?? max(1, count($state['queue']) + (int) $state['total'] - (!empty($state['answered']) ? 1 : 0)));
 $finished = false;
 $summary  = null;
 
@@ -146,8 +148,13 @@ include __DIR__ . '/includes/header.php';
             : ($state['queue'][0] ?? 0)
     );
     $card       = $currentId ? fetch_card($currentId) : null;
-    $totalCards = ($state['total'] + count($state['queue']));
-    $progress   = $totalCards > 0 ? round($state['total'] / $totalCards * 100) : 0;
+    $initialTotal = max(1, (int) ($state['initial_total'] ?? 1));
+    $remainingCards = count($state['queue']);
+    if (!empty($state['answered']) && $remainingCards > 0) {
+        $remainingCards--;
+    }
+    $shownTotal = min((int) $state['total'], $initialTotal);
+    $progress = min(100, round($shownTotal / $initialTotal * 100));
     ?>
 
     <?php if (!$card): ?>
@@ -165,8 +172,9 @@ include __DIR__ . '/includes/header.php';
                     <span class="badge neutral"><?= h($modeLabel) ?></span>
                 </div>
                 <div class="meta" style="text-align:right;font-size:12px;">
+                    Верно:
                     <span style="color:var(--cobalt);font-weight:700;"><?= h((string)$state['score']) ?></span>
-                    / <?= h((string)$state['total']) ?> верно
+                    / <?= h((string)$initialTotal) ?>
                 </div>
             </div>
 
@@ -227,7 +235,7 @@ include __DIR__ . '/includes/header.php';
             <?php endif; ?>
 
             <p class="meta" style="margin-top:18px;font-size:12px;display:flex;justify-content:space-between;">
-                <span>Осталось в очереди: <strong><?= h((string)count($state['queue'])) ?></strong></span>
+                <span>Осталось в очереди: <strong><?= h((string)$remainingCards) ?></strong></span>
                 <span>Прогресс: <?= $progress ?>%</span>
             </p>
         </section>
