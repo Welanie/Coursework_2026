@@ -20,6 +20,7 @@ CREATE TABLE users (
   email VARCHAR(120) NOT NULL UNIQUE,
   password_hash VARCHAR(255) NOT NULL,
   role ENUM('user', 'admin') NOT NULL DEFAULT 'user',
+  rating_points INT NOT NULL DEFAULT 1000,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -110,11 +111,11 @@ CREATE TABLE favorites (
     ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO users (id, username, email, password_hash, role) VALUES
-(1, 'admin', 'admin@example.local', 'sha256$8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'admin'),
-(2, 'student', 'student@example.local', 'sha256$8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'user'),
-(3, 'marina', 'marina@example.local', 'sha256$8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'user'),
-(4, 'pavel', 'pavel@example.local', 'sha256$8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'user');
+INSERT INTO users (id, username, email, password_hash, role, rating_points) VALUES
+(1, 'admin', 'admin@example.local', 'sha256$8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'admin', 1000),
+(2, 'student', 'student@example.local', 'sha256$8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'user', 1035),
+(3, 'marina', 'marina@example.local', 'sha256$8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'user', 1012),
+(4, 'pavel', 'pavel@example.local', 'sha256$8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'user', 1000);
 
 INSERT INTO categories (id, name, description) VALUES
 (1, 'Оксиды', 'Соединения элементов с кислородом'),

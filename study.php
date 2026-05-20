@@ -77,7 +77,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ];
             $state['total']++;
             if ($correct) { $state['score']++; }
-            if ($user) { update_progress((int) $user['id'], (int) $card['id'], $correct); }
+            if ($user) {
+                update_progress((int) $user['id'], (int) $card['id'], $correct);
+                update_user_rating((int) $user['id'], $correct);
+            }
         }
     }
 

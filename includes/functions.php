@@ -72,7 +72,7 @@ function current_user(): ?array
         return null;
     }
 
-    $stmt = get_pdo()->prepare('SELECT id, username, email, role, created_at FROM users WHERE id = ?');
+    $stmt = get_pdo()->prepare('SELECT id, username, email, role, rating_points, created_at FROM users WHERE id = ?');
     $stmt->execute([$_SESSION['user_id']]);
     $user = $stmt->fetch() ?: null;
 
@@ -239,6 +239,13 @@ function update_progress(int $userId, int $flashcardId, bool $correct): void
          VALUES (?, ?, ?, 1, ?, NOW(), ?)'
     );
     $stmt->execute([$userId, $flashcardId, $correct ? 1 : 0, $rating, $nextReview]);
+}
+
+function update_user_rating(int $userId, bool $correct): void
+{
+    $delta = $correct ? 8 : -3;
+    $stmt = get_pdo()->prepare('UPDATE users SET rating_points = GREATEST(0, rating_points + ?) WHERE id = ?');
+    $stmt->execute([$delta, $userId]);
 }
 
 function record_study_session(int $userId, int $setId, string $mode, int $score, int $total): void

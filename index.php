@@ -22,6 +22,14 @@ $setsStmt = $pdo->query(
 );
 $sets = $setsStmt->fetchAll();
 
+$leadersStmt = $pdo->query(
+    'SELECT username, rating_points
+     FROM users
+     ORDER BY rating_points DESC, username
+     LIMIT 5'
+);
+$leaders = $leadersStmt->fetchAll();
+
 include __DIR__ . '/includes/header.php';
 ?>
 
@@ -37,14 +45,28 @@ include __DIR__ . '/includes/header.php';
             <?php endif; ?>
         </div>
     </div>
-    <div class="panel soft">
+    <aside class="panel soft leaderboard-panel">
         <h2>Состояние проекта</h2>
         <div class="stats">
             <div class="stat"><strong><?= h((string) $counts['sets']) ?></strong><span>публичных наборов</span></div>
             <div class="stat"><strong><?= h((string) $counts['cards']) ?></strong><span>карточек</span></div>
             <div class="stat"><strong><?= h((string) $counts['users']) ?></strong><span>пользователей</span></div>
         </div>
-    </div>
+        <div class="leaderboard">
+            <div class="section-header">
+                <h2>Лидерборд</h2>
+                <span class="badge amber">очки</span>
+            </div>
+            <?php foreach ($leaders as $place => $leader): ?>
+                <div class="leaderboard-row">
+                    <span class="leader-place"><?= h((string) ($place + 1)) ?></span>
+                    <span class="leader-name"><?= h($leader['username']) ?></span>
+                    <strong><?= h((string) $leader['rating_points']) ?></strong>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <p class="meta" style="margin-top: 12px;">Стартовый рейтинг: 1000 очков. За правильный ответ +8, за ошибку -3.</p>
+    </aside>
 </section>
 
 <section class="grid">

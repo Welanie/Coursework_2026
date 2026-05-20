@@ -480,6 +480,50 @@ button.sm { min-height: 30px; padding: 5px 11px; font-size: 12px; }
 .stat.success strong { color: var(--success); }
 .stat.neutral strong { color: var(--ink); }
 
+.leaderboard-panel .stats {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    margin-bottom: 22px;
+}
+
+.leaderboard {
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+}
+
+.leaderboard-row {
+    display: grid;
+    grid-template-columns: 32px 1fr auto;
+    gap: 10px;
+    align-items: center;
+    min-height: 42px;
+    border-bottom: 1px solid var(--line);
+}
+
+.leaderboard-row:last-child {
+    border-bottom: 0;
+}
+
+.leader-place {
+    display: grid;
+    width: 26px;
+    height: 26px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--cobalt-l);
+    color: var(--cobalt-d);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.leader-name {
+    color: var(--ink-2);
+    font-weight: 600;
+}
+
+.leaderboard-row strong {
+    color: var(--amber-d);
+}
+
 /* Формы */
 .form-panel {
     max-width: 780px;
