@@ -14,12 +14,12 @@
     --line-2:     rgba(15, 22, 35, 0.16);
 
     /* Основной цвет */
-    --cobalt:     #2b4acb;
-    --cobalt-d:   #1a30a0;
-    --cobalt-dd:  #0f1e72;
-    --cobalt-l:   #eef1fc;
-    --cobalt-m:   #c5cef7;
-    --cobalt-mid: #7a96e8;
+    --cobalt:     #3f63c7;
+    --cobalt-d:   #2f4fa8;
+    --cobalt-dd:  #22396f;
+    --cobalt-l:   #eef4ff;
+    --cobalt-m:   #cfddff;
+    --cobalt-mid: #829ce0;
 
     /* Дополнительный цвет */
     --amber:      #d97706;
