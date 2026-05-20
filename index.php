@@ -58,7 +58,8 @@ include __DIR__ . '/includes/header.php';
                 <span class="badge amber">очки</span>
             </div>
             <?php foreach ($leaders as $place => $leader): ?>
-                <div class="leaderboard-row">
+                <?php $leaderPlace = $place + 1; ?>
+                <div class="leaderboard-row <?= $leaderPlace <= 3 ? 'leaderboard-top leaderboard-top-' . $leaderPlace : '' ?>">
                     <span class="leader-place"><?= h((string) ($place + 1)) ?></span>
                     <span class="leader-name"><?= h($leader['username']) ?></span>
                     <strong><?= h((string) $leader['rating_points']) ?></strong>
