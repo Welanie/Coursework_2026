@@ -1,7 +1,9 @@
 <?php
 $user = current_user();
 $pageTitle = $pageTitle ?? APP_NAME;
-$activePath = trim(str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? ''), '/');
+
+$scriptName = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
+$activePath  = trim($scriptName, '/');
 ?>
 <!doctype html>
 <html lang="ru">
@@ -20,25 +22,42 @@ $activePath = trim(str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? ''), '/');
             <small><?= h(APP_SUBTITLE) ?></small>
         </span>
     </a>
-    <nav class="nav">
-        <a href="<?= h(app_url('sets.php')) ?>">Наборы</a>
-        <a href="<?= h(app_url('cards.php')) ?>">Карточки</a>
-        <a href="<?= h(app_url('stats.php')) ?>">Прогресс</a>
-        <?php if ($user): ?>
-            <a href="<?= h(app_url('my_sets.php')) ?>">Мои наборы</a>
-            <a href="<?= h(app_url('favorites.php')) ?>">Избранное</a>
-        <?php endif; ?>
+
+    <nav class="nav" aria-label="Основная навигация">
+        <?php
+        $navLinks = [
+            'sets.php'      => 'Наборы',
+            'cards.php'     => 'Карточки',
+            'stats.php'     => 'Прогресс',
+        ];
+        if ($user) {
+            $navLinks['my_sets.php']   = 'Мои наборы';
+            $navLinks['favorites.php'] = 'Избранное';
+        }
+        foreach ($navLinks as $href => $label):
+            $isActive = substr($activePath, -strlen($href)) === $href;
+        ?>
+            <a href="<?= h(app_url($href)) ?>"
+               <?= $isActive ? 'aria-current="page"' : '' ?>>
+                <?= h($label) ?>
+            </a>
+        <?php endforeach; ?>
+
         <?php if (is_admin()): ?>
-            <a href="<?= h(app_url('admin/index.php')) ?>">Админка</a>
+            <a href="<?= h(app_url('admin/index.php')) ?>"
+               <?= strpos($activePath, 'admin/') !== false ? 'aria-current="page"' : '' ?>>
+                Админка
+            </a>
         <?php endif; ?>
     </nav>
+
     <div class="account">
         <?php if ($user): ?>
             <span><?= h($user['username']) ?></span>
-            <a class="button ghost" href="<?= h(app_url('logout.php')) ?>">Выйти</a>
+            <a class="button ghost sm" href="<?= h(app_url('logout.php')) ?>">Выйти</a>
         <?php else: ?>
-            <a class="button ghost" href="<?= h(app_url('login.php')) ?>">Войти</a>
-            <a class="button" href="<?= h(app_url('register.php')) ?>">Регистрация</a>
+            <a class="button ghost sm" href="<?= h(app_url('login.php')) ?>">Войти</a>
+            <a class="button sm" href="<?= h(app_url('register.php')) ?>">Регистрация</a>
         <?php endif; ?>
     </div>
 </header>
