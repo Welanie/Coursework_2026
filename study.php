@@ -11,6 +11,8 @@ if (!in_array($mode, $allowedModes, true)) {
 $set = ensure_set_access($setId);
 $user = current_user();
 $pageTitle = 'Тренировка';
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
 $sessionKey = 'study_' . $setId . '_' . $mode;
 $shouldReset = isset($_GET['reset']);
 
@@ -44,12 +46,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $submittedCardId = (int) ($_POST['card_id'] ?? 0);
         $queueIds   = array_map('intval', $state['queue']);
         $queueIndex = $submittedCardId > 0 ? array_search($submittedCardId, $queueIds, true) : false;
-        if ($queueIndex === false) {
-            $queueIndex      = 0;
+
+        if ($submittedCardId <= 0) {
             $submittedCardId = (int) $queueIds[0];
+            $queueIndex = 0;
         }
 
         $card = fetch_card($submittedCardId);
+        if (!$card || (int) $card['set_id'] !== $setId) {
+            $submittedCardId = (int) $queueIds[0];
+            $queueIndex = 0;
+            $card = fetch_card($submittedCardId);
+        }
+
+        if ($card && $queueIndex === false) {
+            array_unshift($state['queue'], (int) $card['id']);
+            $queueIndex = 0;
+        }
+
         if ($card) {
             $answer  = trim($_POST['answer'] ?? '');
             $correct = answer_is_correct($answer, $card['name']);
