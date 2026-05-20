@@ -14,7 +14,7 @@ $pageTitle = 'Тренировка';
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
 $sessionKey = 'study_' . $setId . '_' . $mode;
-$shouldReset = isset($_GET['reset']);
+$shouldReset = $_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['reset']);
 
 if ($shouldReset || empty($_SESSION[$sessionKey]) || ($_SESSION[$sessionKey]['set_id'] ?? 0) !== $setId) {
     $queue = build_study_queue($setId, $mode, $user ? (int) $user['id'] : null);
