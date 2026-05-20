@@ -3,7 +3,7 @@
 
 <footer class="footer">
     <span><?= h(APP_NAME) ?>, <?= h((string) $year) ?></span>
-    <span>PHP, MySQL, PDO, сессии, адаптивная вёрстка</span>
+    <span>Курсовая работа по веб-программированию</span>
 </footer>
 </body>
 </html>
