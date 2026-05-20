@@ -132,11 +132,11 @@ include __DIR__ . '/includes/header.php';
         </div>
         <p class="meta" style="margin-bottom:24px;">
             <?php if ($pct >= 80): ?>
-                <span class="badge success">Отлично — <?= $pct ?>%</span>
+                <span class="badge success">Отлично - <?= $pct ?>%</span>
             <?php elseif ($pct >= 50): ?>
-                <span class="badge amber">Неплохо — <?= $pct ?>%</span>
+                <span class="badge amber">Неплохо - <?= $pct ?>%</span>
             <?php else: ?>
-                <span class="badge danger">Есть над чем поработать — <?= $pct ?>%</span>
+                <span class="badge danger">Есть над чем поработать - <?= $pct ?>%</span>
             <?php endif; ?>
         </p>
 
@@ -229,7 +229,7 @@ include __DIR__ . '/includes/header.php';
                     <input type="hidden" name="set_id" value="<?= h((string)$setId) ?>">
                     <input type="hidden" name="mode"   value="<?= h($mode) ?>">
                     <input type="hidden" name="action" value="next">
-                    <button type="submit" style="width:100%;justify-content:center;">Следующая карточка →</button>
+                    <button type="submit" style="width:100%;justify-content:center;">Следующая карточка</button>
                 </form>
 
             <?php else: ?>

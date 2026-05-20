@@ -1,11 +1,8 @@
-/* ============================================================
-   ChemCards — Design System v2
-   Palette: Cobalt-Indigo + Amber · Font: DM Sans / DM Mono
-   ============================================================ */
+/* Стили сайта ChemCards */
 
-/* ── Variables ────────────────────────────────────────────── */
+/* Переменные */
 :root {
-    /* Neutrals */
+    /* Основные цвета */
     --ink:        #0f1623;
     --ink-2:      #2d3a4d;
     --ink-3:      #4d5f73;
@@ -16,7 +13,7 @@
     --line:       rgba(15, 22, 35, 0.09);
     --line-2:     rgba(15, 22, 35, 0.16);
 
-    /* Cobalt – primary brand */
+    /* Основной цвет */
     --cobalt:     #2b4acb;
     --cobalt-d:   #1a30a0;
     --cobalt-dd:  #0f1e72;
@@ -24,13 +21,13 @@
     --cobalt-m:   #c5cef7;
     --cobalt-mid: #7a96e8;
 
-    /* Amber – accent / science warmth */
+    /* Дополнительный цвет */
     --amber:      #d97706;
     --amber-d:    #92400e;
     --amber-l:    #fef3c7;
     --amber-m:    #fde68a;
 
-    /* Semantic */
+    /* Цвета сообщений */
     --success:    #059669;
     --success-l:  #ecfdf5;
     --success-m:  #a7f3d0;
@@ -42,17 +39,17 @@
     --info:       #0891b2;
     --info-l:     #e0f7fa;
 
-    /* Shape */
+    /* Скругления */
     --r:          10px;
     --r-sm:       6px;
     --r-lg:       14px;
 
-    /* Shadow */
+    /* Тени */
     --shadow:     0 1px 3px rgba(15,22,35,0.06), 0 4px 16px rgba(15,22,35,0.05);
     --shadow-md:  0 2px 8px rgba(15,22,35,0.08), 0 8px 24px rgba(15,22,35,0.07);
 }
 
-/* ── Reset ────────────────────────────────────────────────── */
+/* Общие стили */
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
@@ -79,7 +76,7 @@ h3 { font-size: 17px; }
 
 p { margin: 0 0 12px; }
 
-/* ── Topbar ───────────────────────────────────────────────── */
+/* Шапка */
 .topbar {
     position: sticky;
     top: 0;
@@ -172,13 +169,13 @@ p { margin: 0 0 12px; }
     color: var(--muted);
 }
 
-/* ── Container ────────────────────────────────────────────── */
+/* Основной контейнер */
 .container {
     width: min(1200px, calc(100% - 32px));
     margin: 28px auto 52px;
 }
 
-/* ── Footer ───────────────────────────────────────────────── */
+/* Подвал */
 .footer {
     display: flex;
     justify-content: space-between;
@@ -190,7 +187,7 @@ p { margin: 0 0 12px; }
     font-size: 13px;
 }
 
-/* ── Buttons ──────────────────────────────────────────────── */
+/* Кнопки */
 .button,
 button,
 input[type="submit"] {
@@ -221,7 +218,6 @@ input[type="submit"]:hover {
 .button:active,
 button:active { transform: scale(0.98); }
 
-/* Ghost */
 .button.ghost,
 button.ghost {
     background: #fff;
@@ -234,7 +230,6 @@ button.ghost:hover {
     color: var(--ink);
 }
 
-/* Danger */
 .button.danger,
 button.danger {
     background: var(--danger);
@@ -243,25 +238,22 @@ button.danger {
 .button.danger:hover,
 button.danger:hover { background: #b91c1c; }
 
-/* Warning */
 .button.warning,
 button.warning {
     background: var(--amber);
     color: #fff;
 }
 
-/* Amber light */
 .button.amber-soft {
     background: var(--amber-l);
     border: 1px solid var(--amber-m);
     color: var(--amber-d);
 }
 
-/* Small */
 .button.sm,
 button.sm { min-height: 30px; padding: 5px 11px; font-size: 12px; }
 
-/* ── Alerts ───────────────────────────────────────────────── */
+/* Сообщения */
 .alert {
     display: flex;
     align-items: flex-start;
@@ -295,7 +287,7 @@ button.sm { min-height: 30px; padding: 5px 11px; font-size: 12px; }
 }
 .alert.warning::before { content: "!"; font-weight: 700; color: var(--amber); }
 
-/* ── Badges ───────────────────────────────────────────────── */
+/* Метки */
 .badge {
     display: inline-flex;
     align-items: center;
@@ -313,7 +305,7 @@ button.sm { min-height: 30px; padding: 5px 11px; font-size: 12px; }
 .badge.info { background: var(--info-l); color: #0e7490; }
 .badge.neutral { background: var(--surf-2); color: var(--ink-3); border: 1px solid var(--line); }
 
-/* ── Panels & Cards ───────────────────────────────────────── */
+/* Панели и карточки */
 .panel,
 .card,
 .table-wrap,
@@ -334,7 +326,7 @@ button.sm { min-height: 30px; padding: 5px 11px; font-size: 12px; }
 
 .card:hover { box-shadow: var(--shadow-md); }
 
-/* ── Flashcard set cards ──────────────────────────────────── */
+/* Карточки наборов */
 .set-card {
     background: var(--surf);
     border: 1px solid var(--line);
@@ -351,7 +343,7 @@ button.sm { min-height: 30px; padding: 5px 11px; font-size: 12px; }
     transform: translateY(-1px);
 }
 
-/* coloured top stripe — use inline style="--stripe: #hex" on .set-card */
+/* Верхняя цветная линия карточки */
 .set-card::before {
     content: '';
     position: absolute;
@@ -364,7 +356,7 @@ button.sm { min-height: 30px; padding: 5px 11px; font-size: 12px; }
 .set-card h3 { font-size: 15px; margin: 10px 0 4px; }
 .set-card .meta { font-size: 12.5px; color: var(--muted); margin-bottom: 14px; }
 
-/* ── Grid helpers ─────────────────────────────────────────── */
+/* Сетки */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -382,7 +374,7 @@ button.sm { min-height: 30px; padding: 5px 11px; font-size: 12px; }
     align-items: center;
 }
 
-/* ── Stats ────────────────────────────────────────────────── */
+/* Статистика */
 .stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -411,7 +403,7 @@ button.sm { min-height: 30px; padding: 5px 11px; font-size: 12px; }
 .stat.success strong { color: var(--success); }
 .stat.neutral strong { color: var(--ink); }
 
-/* ── Forms ────────────────────────────────────────────────── */
+/* Формы */
 .form-panel {
     max-width: 780px;
     padding: 26px;
@@ -465,7 +457,7 @@ select {
     padding-right: 32px;
 }
 
-/* ── Filters bar ──────────────────────────────────────────── */
+/* Фильтры */
 .filters {
     display: grid;
     grid-template-columns: 1fr minmax(180px, 260px) auto;
@@ -474,7 +466,7 @@ select {
     margin-bottom: 16px;
 }
 
-/* ── Formula display ──────────────────────────────────────── */
+/* Формулы */
 .formula {
     font-family: 'Consolas', 'Courier New', monospace;
     font-size: 44px;
@@ -491,7 +483,7 @@ select {
     bottom: -0.25em;
 }
 
-/* Formula in table/inline context */
+/* Формула в таблице */
 .formula-inline {
     font-family: 'Consolas', 'Courier New', monospace;
     font-size: 16px;
@@ -500,7 +492,7 @@ select {
 }
 .formula-inline sub { font-size: 0.65em; }
 
-/* ── Study card ───────────────────────────────────────────── */
+/* Тренировка */
 .study-card {
     max-width: 680px;
     margin: 0 auto;
@@ -508,7 +500,6 @@ select {
     text-align: center;
 }
 
-/* Formula backdrop on study page */
 .formula-backdrop {
     background: var(--cobalt-l);
     border-radius: var(--r);
@@ -517,7 +508,6 @@ select {
     border: 1px solid var(--cobalt-m);
 }
 
-/* Progress bar */
 .progress-bar-wrap {
     height: 4px;
     background: var(--cobalt-m);
@@ -533,7 +523,7 @@ select {
     transition: width 0.3s ease;
 }
 
-/* Difficulty dots */
+/* Сложность */
 .difficulty-dots {
     display: inline-flex;
     gap: 3px;
@@ -561,7 +551,7 @@ select {
     background: var(--amber);
 }
 
-/* Result states */
+/* Результат ответа */
 .result-correct {
     display: flex;
     align-items: center;
@@ -592,7 +582,7 @@ select {
     margin: 14px 0;
 }
 
-/* ── Hero layout ──────────────────────────────────────────── */
+/* Главный блок */
 .hero {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
@@ -601,7 +591,7 @@ select {
     margin-bottom: 28px;
 }
 
-/* ── Tables ───────────────────────────────────────────────── */
+/* Таблицы */
 .table-wrap { overflow-x: auto; }
 
 table {
@@ -635,7 +625,7 @@ tr:last-child td { border-bottom: none; }
 
 tr:hover td { background: var(--cobalt-l); }
 
-/* ── Pagination ───────────────────────────────────────────── */
+/* Пагинация */
 .pagination {
     display: flex;
     gap: 6px;
@@ -668,7 +658,7 @@ tr:hover td { background: var(--cobalt-l); }
     color: #fff;
 }
 
-/* ── Chart canvas ─────────────────────────────────────────── */
+/* График */
 canvas.progress-chart {
     width: 100%;
     height: 220px;
@@ -677,7 +667,7 @@ canvas.progress-chart {
     background: #fff;
 }
 
-/* ── Meta text ────────────────────────────────────────────── */
+/* Текстовые элементы */
 .meta {
     color: var(--muted);
     font-size: 13px;
@@ -689,7 +679,6 @@ canvas.progress-chart {
     margin: 0 0 20px;
 }
 
-/* Section header pattern */
 .section-header {
     display: flex;
     align-items: flex-end;
@@ -709,7 +698,7 @@ canvas.progress-chart {
     margin-bottom: 6px;
 }
 
-/* ── Login / register page ────────────────────────────────── */
+/* Вход и регистрация */
 .auth-wrap {
     min-height: calc(100vh - 58px);
     display: flex;
@@ -731,7 +720,7 @@ canvas.progress-chart {
 .auth-card h1 { font-size: 24px; margin-bottom: 4px; }
 .auth-card .lead { font-size: 14px; margin-bottom: 24px; color: var(--muted); }
 
-/* ── Inline actions in table ──────────────────────────────── */
+/* Действия в таблицах */
 .inline-actions {
     display: flex;
     gap: 6px;
@@ -740,7 +729,7 @@ canvas.progress-chart {
 
 .inline-actions form { margin: 0; }
 
-/* ── Responsive ───────────────────────────────────────────── */
+/* Адаптивность */
 @media (max-width: 860px) {
     .topbar { height: auto; flex-wrap: wrap; padding: 12px 16px; gap: 10px; }
     .brand { min-width: 0; }
@@ -765,7 +754,6 @@ canvas.progress-chart {
 
     .section-header { flex-direction: column; align-items: flex-start; }
 
-    /* Mobile table scroll with fade hint */
     .table-wrap {
         position: relative;
     }
@@ -782,7 +770,7 @@ canvas.progress-chart {
     .auth-card { padding: 24px 18px; }
 }
 
-/* ── Utility ──────────────────────────────────────────────── */
+/* Вспомогательные классы */
 .text-muted { color: var(--muted); }
 .text-cobalt { color: var(--cobalt); }
 .text-amber  { color: var(--amber); }
