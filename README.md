@@ -67,11 +67,8 @@ http://chemcards.local
 
 ## Готовый архив
 
-ZIP-архив проекта находится в папке:
-
-```text
-release/ChemCards.zip
-```
+- [Скачать ChemCards.zip](https://github.com/Welanie/Coursework_2026/raw/main/release/ChemCards.zip)
+- Формат: ZIP, размер: около 45 КБ.
 
 В архиве находятся PHP-файлы, папки `admin`, `includes`, `css`, `sql`, `docs` и файл `README.md`.
 
